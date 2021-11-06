@@ -1,0 +1,40 @@
+img.imgAuth{
+    animation: 20s linear 0s normal none infinite running rot;
+    -webkit-animation: 20s linear 0s normal none infinite running rot;
+    width: 100px;
+  }
+  @keyframes rot {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes rot {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+.list-group-item{
+  background-color: white;
+  border: 1px solid black;
+  text-align: center;
+}
+.list-group-item:hover{
+  background-color: hotpink;
+  border: 1px solid black;
+}
+.list-group-item.active{
+  background-color: hotpink;
+  border: 1px solid black;
+}
+div.p-3.card{
+  width: 220px;
+  text-align: center;
+  border: 2px solid black;
+  margin-left: 5px;
+}
