@@ -1,7 +1,7 @@
 import BasketModel from "../models/BasketModel.js";
 class BasketService {
-    async create({productName, productImg, productPrice, quantity, totalSum, personName, deliveryMethod, paymentMethod, phoneNumber, commentToTheOrder}) {
-        const createBasket = await BasketModel.create(productName, productImg, productPrice, quantity, totalSum, personName, deliveryMethod, paymentMethod, phoneNumber, commentToTheOrder);
+    async create(id, order) {
+    const createBasket = await BasketModel.create(id, order);
         return createBasket;
     };
     async getOne(id) {

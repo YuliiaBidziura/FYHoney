@@ -28,6 +28,7 @@ const Auth = observer(() => {
             }
             user.setUser(user);
             user.setIsAuth(true);
+            user.setUserEmail(JSON.stringify(data.email));
             history.push(SHOP_ROUTE);
         } catch (e) {
             alert(e.response.data.message)

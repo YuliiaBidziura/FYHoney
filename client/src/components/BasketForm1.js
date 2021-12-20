@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import {Form, Button} from 'react-bootstrap';
+import {Form, Button, Alert} from 'react-bootstrap';
 import {SHOP_ROUTE} from '../utils/consts.js'
 import {useHistory} from 'react-router-dom';
 import { Context } from "../index.js";
@@ -9,33 +9,41 @@ import { createBasket } from "../http/basketApi.js";
 
 const BasketForm1 = observer(() => {
     const history = useHistory()
-    const { user, basket } = useContext(Context);
+    const { user, basket, orderStore, totalSum } = useContext(Context);
     const [value, setValue] = useState('')
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [comment, setComment] = useState('')
-    basket.setAdress(value)
-    basket.setPersonName(name)
-    basket.setPhoneNumber(phone)
-    basket.setCommentToTheOrder(comment)
-
-
+    
+    orderStore.setAdress(value)
+    orderStore.setPersonName(name)
+    orderStore.setPhone(phone)
+    orderStore.setComment(comment)
+    const showAlert = () => {
+        alert('Замовлення оформлено!')
+        setTimeout(() => {history.push(SHOP_ROUTE)}, 1000)
+    }
     const createOrder = () => {
+        let newResult = Object.values(orderStore.productAndCount)
+        newResult = newResult.map(i => i.sum)
+        let result = newResult.reduce(function(sum, current) {
+            return sum + current;
+        }, 0);
+        orderStore.setTotalSum(result)
         const formData = new FormData()
         formData.append('id', user.id)
-        formData.append('personName', basket.personName)
-        formData.append('deliveryMethod', basket.deliveryMethod)
-        formData.append('paymentMethod', basket.paymentMethod)
-        formData.append('phoneNumber', basket.phoneNumber)
-        formData.append('commentToTheOrder', basket.commentToTheOrder)
-        formData.append('productName', basket.productName)
-        formData.append('productImg', basket.productImg)
-        formData.append('productPrice', basket.productPrice)
-        formData.append('quantity', basket.quantity)
-        formData.append('totalSum', basket.totalSum)
-        createBasket(formData).then(alert('Замовлення оформлено!'))
+        formData.append('email', user.email)
+        formData.append('phone', orderStore.userPhone)
+        formData.append('name', orderStore.personName)
+        formData.append('comment', orderStore.comment)
+        formData.append('adress', orderStore.adress)
+        formData.append('paymentMethod', orderStore.paymentMethod)
+        formData.append('deliveryMethod', orderStore.deliveryMethod)
+        formData.append('order', JSON.stringify(orderStore.finalOrder))
+        createBasket(formData)
+        showAlert()
     }
-
+    
     return (
         <Form>
             <h2>Спосіб оплати</h2>
@@ -43,27 +51,27 @@ const BasketForm1 = observer(() => {
                 <Button  
                     variant="outline-dark"
                     className="buttonPay"
-                    onClick={() => {basket.setPaymentMethod('Готівка')}}
+                    onClick={() => {orderStore.setPaymentMethod('Готівка')}}
                     style={{cursor: 'pointer'}}
-                    active={`${basket.paymentMethod}` === 'Готівка'}
+                    active={`${orderStore.paymentMethod}` === 'Готівка'}
                 > 
                     Готівка
                 </Button>
                 <Button 
                     variant="outline-dark"
                     className="buttonPay"
-                    onClick={() => {basket.setPaymentMethod(`MONO`)}}
+                    onClick={() => {orderStore.setPaymentMethod(`MONO`)}}
                     style={{cursor: 'pointer'}}
-                    active={`${basket.paymentMethod}` === `MONO`}
+                    active={`${orderStore.paymentMethod}` === `MONO`}
                 >
                     MONO
                 </Button>
                 <Button 
                     variant="outline-dark" 
                     className="buttonPay"
-                    onClick={() => {basket.setPaymentMethod(`Visa/MasterCard`)}}
+                    onClick={() => {orderStore.setPaymentMethod(`Visa/MasterCard`)}}
                     style={{cursor: 'pointer'}}
-                    active={`${basket.paymentMethod}` === `Visa/MasterCard`}
+                    active={`${orderStore.paymentMethod}` === `Visa/MasterCard`}
                 >
                     Visa/MasterCard
                 </Button>
@@ -73,18 +81,18 @@ const BasketForm1 = observer(() => {
                 <Button  
                     variant="outline-dark"
                     className="buttonPay"
-                    onClick={() => basket.setDeliveryMethod(`Кур'єрська доставка`)}
+                    onClick={() => orderStore.setDeliveryMethod(`Кур'єрська доставка`)}
                     style={{cursor: 'pointer'}}
-                    active={`${basket.deliveryMethod}` === `Кур'єрська доставка`}
+                    active={`${orderStore.deliveryMethod}` === `Кур'єрська доставка`}
                 > 
                     Кур'єрська доставка
                 </Button>
                 <Button 
                     variant="outline-dark"
                     className="buttonPay"
-                    onClick={() =>basket.setDeliveryMethod(`Самовивіз`)}
+                    onClick={() =>orderStore.setDeliveryMethod(`Самовивіз`)}
                     style={{cursor: 'pointer'}}
-                    active={`${basket.deliveryMethod}` === `Самовивіз`}
+                    active={`${orderStore.deliveryMethod}` === `Самовивіз`}
                 >
                     Самовивіз
                 </Button>

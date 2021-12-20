@@ -1,7 +1,6 @@
 // import UserService from "../service/UserService";
 import bcrypt, { compareSync } from "bcrypt";
 import UserModel from "../models/UserModel.js";
-import BasketModel from "../models/BasketModel.js";
 import jwt from 'jsonwebtoken';
 
 const SECRET_KEY = '1q2w3e4r5t6y7u8i9o9z8x7c6v5b4n3m2d1k';
@@ -47,7 +46,6 @@ class UserController {
     async check(req, res) {
         try {
             const token = jwt.sign({id: req.user.id, email: req.user.email, password: req.user.password}, SECRET_KEY, {expiresIn: '24h'} );
-            const basket = await BasketModel.create();
             return res.json({token});
         } catch (e) {
             res.status(500).json(e);

@@ -1,102 +1,69 @@
 import {makeAutoObservable} from 'mobx';
 export default class BasketStore {
     constructor() {
-        this._products = [{}]
-        this._personName = ''
-        this._deliveryMethod = ''
+        this._id = ''
+        this._email = ''
+        this._name = ''
+        this._phone = ''
+        this._comment = ''
+        this._adress = ''
         this._paymentMethod = ''
-        this._phoneNumber = ''
-        this._commentToTheOrder = ''
-        this._productId = ''
-        this._productName = ''
-        this._productImg = ''
-        this._productPrice = ''
-        this._quantity = ''
-        this._totalSum = ''
-        this._adress=''
+        this._deliveryMethod = ''
+        this._order = {}
         makeAutoObservable(this)
     }
-
+    setBasketId(id) {
+        this._id = id;
+    }
+    setOrder(order) {
+        this._order = order;
+    }
+    setEmail(email) {
+        this._email = email;
+    }
+    setName(name) {
+        this._name = name;
+    }
+    setPhone(phone) {
+        this._phone = phone;
+    }
+    setComment(comment) {
+        this._comment = comment;
+    }
     setAdress(adress) {
         this._adress = adress;
     }
-    setProductName(productName) {
-        this._productName = productName;
-    }
-    setProductImg(productImg) {
-        this._productImg = productImg;
-    }
-    setProductPrice(productPrice) {
-        this._productPrice = productPrice;
-    }
-    setQuantity(quantity) {
-        this._quantity = quantity;
-    }
-    setTotalSum(totalSum) {
-        this._totalSum = totalSum;
-    }
-    setProductId(productId) {
-        this._productId = productId;
-    }
-    setProducts(product) {
-        this._products = product
-
-    }
-    setPersonName(personName) {
-        this._personName = personName;
+    setPaymentMethod(method) {
+        this._paymentMethod = method;
     }
     setDeliveryMethod(deliveryMethod) {
         this._deliveryMethod = deliveryMethod;
     }
-    setPaymentMethod(paymentMethod) {
-        this._paymentMethod = paymentMethod;
+    get basketId() {
+        return this._id;
     }
-    setPhoneNumber(phoneNumber) {
-        this._phoneNumber = phoneNumber;
+    get order() {
+        return this._order;
     }
-    setCommentToTheOrder(commentToTheOrder) {
-        this._commentToTheOrder = commentToTheOrder;
+    get email() {
+        return this._email;
     }
-
+    get name() {
+        return this._name;
+    }
+    get phone() {
+        return this._phone
+    }
+    get comment() {
+        return this._comment;
+    }
     get adress() {
         return this._adress;
-    }
-   
-    get products() {
-        return  this._product;
-    }
-    get personName() {
-        return this._personName;
-    }
-    get deliveryMethod() {
-        return this._deliveryMethod;
     }
     get paymentMethod() {
         return this._paymentMethod;
     }
-    get phoneNumber() {
-        return this._phoneNumber;
+    get deliveryMethod() {
+        return this._deliveryMethod;
     }
-    get commentToTheOrder() {
-        return this._commentToTheOrder;
-    }
-    get productName() {
-        return this._productName;
-    }
-    get productImg() {
-        return this._productImg;
-    }
-    get productPrice() {
-        return this._productPrice;
-    }
-    get quantity() {
-        return this._quantity;
-    }
-    get totalSum() {
-        return this._totalSum;
-    }
-    get productId() {
-        return this._productId;
-    }
-    
 }
