@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/FYHoney/static/css/main.6978e906.chunk.css",
+    "main.js": "/FYHoney/static/js/main.5040925e.chunk.js",
+    "main.js.map": "/FYHoney/static/js/main.5040925e.chunk.js.map",
+    "runtime-main.js": "/FYHoney/static/js/runtime-main.5c3181db.js",
+    "runtime-main.js.map": "/FYHoney/static/js/runtime-main.5c3181db.js.map",
+    "static/js/2.ea828372.chunk.js": "/FYHoney/static/js/2.ea828372.chunk.js",
+    "static/js/2.ea828372.chunk.js.map": "/FYHoney/static/js/2.ea828372.chunk.js.map",
+    "index.html": "/FYHoney/index.html",
+    "static/css/main.6978e906.chunk.css.map": "/FYHoney/static/css/main.6978e906.chunk.css.map",
+    "static/js/2.ea828372.chunk.js.LICENSE.txt": "/FYHoney/static/js/2.ea828372.chunk.js.LICENSE.txt",
+    "static/media/1.500717ea.png": "/FYHoney/static/media/1.500717ea.png",
+    "static/media/3.f8e27e04.png": "/FYHoney/static/media/3.f8e27e04.png",
+    "static/media/b.3e832727.jpg": "/FYHoney/static/media/b.3e832727.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5c3181db.js",
+    "static/js/2.ea828372.chunk.js",
+    "static/css/main.6978e906.chunk.css",
+    "static/js/main.5040925e.chunk.js"
+  ]
+}
